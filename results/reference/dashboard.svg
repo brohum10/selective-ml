@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1040" height="600" viewBox="0 0 1040 600" role="img" aria-label="SelectiveML held-out experiment results">
+<rect width="1040" height="600" rx="24" fill="#101827"/>
+<style>text{font-family:system-ui,sans-serif;fill:#e2e8f0}.muted{fill:#94a3b8}</style>
+<text x="40" y="55" font-size="28" class="">SelectiveML / confidence is not a guarantee</text>
+<text x="40" y="88" font-size="16" class="muted">Three fixed seeds · 275 held-out examples each · public 8×8 digits</text>
+<text x="40" y="137" font-size="18" class="">Held-out accuracy (bars start at zero)</text>
+<text x="40" y="180" font-size="16" class="">Seed 42</text>
+<rect x="160" y="166" width="472.18" height="16" rx="4" fill="#64748b"/>
+<text x="665" y="180" font-size="14" class="">Linear: 96.36%</text>
+<rect x="160" y="190" width="477.53" height="16" rx="4" fill="#2dd4bf"/>
+<text x="665" y="204" font-size="14" class="">MLP: 97.45%</text>
+<rect x="160" y="214" width="441.89" height="16" rx="4" fill="#fb923c"/>
+<text x="665" y="228" font-size="14" class="">MLP + noise: 90.18%</text>
+<text x="40" y="280" font-size="16" class="">Seed 43</text>
+<rect x="160" y="266" width="470.40" height="16" rx="4" fill="#64748b"/>
+<text x="665" y="280" font-size="14" class="">Linear: 96.00%</text>
+<rect x="160" y="290" width="477.53" height="16" rx="4" fill="#2dd4bf"/>
+<text x="665" y="304" font-size="14" class="">MLP: 97.45%</text>
+<rect x="160" y="314" width="459.71" height="16" rx="4" fill="#fb923c"/>
+<text x="665" y="328" font-size="14" class="">MLP + noise: 93.82%</text>
+<text x="40" y="380" font-size="16" class="">Seed 44</text>
+<rect x="160" y="366" width="468.62" height="16" rx="4" fill="#64748b"/>
+<text x="665" y="380" font-size="14" class="">Linear: 95.64%</text>
+<rect x="160" y="390" width="479.31" height="16" rx="4" fill="#2dd4bf"/>
+<text x="665" y="404" font-size="14" class="">MLP: 97.82%</text>
+<rect x="160" y="414" width="461.49" height="16" rx="4" fill="#fb923c"/>
+<text x="665" y="428" font-size="14" class="">MLP + noise: 94.18%</text>
+<text x="40" y="488" font-size="19" class="">What the experiment actually shows</text>
+<text x="40" y="518" font-size="16" class="">The neural model beats the linear baseline in all three splits.</text>
+<text x="40" y="544" font-size="16" class="">Calibration worsens test NLL in 2/3 seeds; noise reduces accuracy to 90.18–94.18%.</text>
+<text x="40" y="570" font-size="14" class="muted">Small benchmark, overlapping split experiments—not production OCR or a statistical guarantee.</text>
+</svg>
