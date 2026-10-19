@@ -12,6 +12,7 @@ jobs:
         python: ['3.12', '3.14']
     env:
       OPENBLAS_NUM_THREADS: '1'
+      EVALDELTA_SCRIPT: tools/evaldelta/evaldelta.py
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
@@ -35,10 +36,14 @@ jobs:
       - run: python selective_ml.py predict --model results/reference/model.json --input results/reference/example.json
       - name: Verify actual pass, block, and invalid-input CLI results
         run: python verify_gate.py --evaldelta tools/evaldelta/evaldelta.py
+      - name: Train both real candidates on every planned seed and retain the comparisons
+        run: python release_lab.py --evaldelta tools/evaldelta/evaldelta.py --output results/release-lab/ci
       - name: Retain reproducible prediction and gate evidence
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: inference-gate-python-${{ matrix.python }}
-          path: results/walkthrough/
+          path: |
+            results/walkthrough/
+            results/release-lab/ci/
           if-no-files-found: error
           retention-days: 14
