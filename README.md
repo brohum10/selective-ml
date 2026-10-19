@@ -8,9 +8,9 @@ A compact, inspectable ML engineering project: train a neural classifier from sc
 
 ## Watch the 40-second walkthrough
 
-[![97% accurate. Still confidently wrong.](media/SelectiveML-Cover.png)](https://github.com/brohum10/selective-ml/raw/refs/heads/main/media/SelectiveML-LinkedIn-Demo.mp4)
+https://github.com/user-attachments/assets/330c3618-8430-4a2c-9ecd-c301f27d25bd
 
-**[Watch the demo](https://github.com/brohum10/selective-ml/raw/refs/heads/main/media/SelectiveML-LinkedIn-Demo.mp4)** · [Inspect the recorded gate result](media/gate.json) · [Demo scope and attribution](media/README.md)
+**[Watch the demo](https://github.com/user-attachments/assets/330c3618-8430-4a2c-9ecd-c301f27d25bd)** · [Inspect the recorded gate result](media/gate.json) · [Demo scope and attribution](media/README.md) · [Download MP4](media/SelectiveML-LinkedIn-Demo.mp4)
 
 Real neural-network inference → simulated input corruption → all 275 held-out
 cases → a paired evaluation gate. The captioned video is a visual replay of actual
