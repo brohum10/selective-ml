@@ -1,0 +1,176 @@
+{
+  "version": 1,
+  "decision": "pass",
+  "baseline_run": "clean",
+  "candidate_run": "clean",
+  "suite": "digits-seed42-test-v1",
+  "scorer": "exact-match-v1",
+  "baseline_sha256": "b8f4d02852010eaadd29a40abd9c44cf9b47784318f2c50f20b38bf5d6a4a62a",
+  "candidate_sha256": "b8f4d02852010eaadd29a40abd9c44cf9b47784318f2c50f20b38bf5d6a4a62a",
+  "config": {
+    "margin": 0.02,
+    "min_cases": 20,
+    "samples": 2000,
+    "seed": 42,
+    "max_p95_ms": 1000
+  },
+  "method": "paired percentile bootstrap; unadjusted per-slice 95% intervals",
+  "blockers": [],
+  "slices": [
+    {
+      "slice": "overall",
+      "n": 275,
+      "mean_delta": 0.0,
+      "baseline_mean": 0.9745454545454545,
+      "candidate_mean": 0.9745454545454545,
+      "interval_95": [
+        0.0,
+        0.0
+      ],
+      "quality_status": "pass",
+      "candidate_p95_ms": 0.14520460000000002,
+      "latency_status": "pass"
+    },
+    {
+      "slice": "tag:digit-0",
+      "n": 27,
+      "mean_delta": 0.0,
+      "baseline_mean": 1.0,
+      "candidate_mean": 1.0,
+      "interval_95": [
+        0.0,
+        0.0
+      ],
+      "quality_status": "pass",
+      "candidate_p95_ms": 0.1414088,
+      "latency_status": "pass"
+    },
+    {
+      "slice": "tag:digit-1",
+      "n": 28,
+      "mean_delta": 0.0,
+      "baseline_mean": 1.0,
+      "candidate_mean": 1.0,
+      "interval_95": [
+        0.0,
+        0.0
+      ],
+      "quality_status": "pass",
+      "candidate_p95_ms": 0.14403575,
+      "latency_status": "pass"
+    },
+    {
+      "slice": "tag:digit-2",
+      "n": 27,
+      "mean_delta": 0.0,
+      "baseline_mean": 1.0,
+      "candidate_mean": 1.0,
+      "interval_95": [
+        0.0,
+        0.0
+      ],
+      "quality_status": "pass",
+      "candidate_p95_ms": 0.1375125,
+      "latency_status": "pass"
+    },
+    {
+      "slice": "tag:digit-3",
+      "n": 28,
+      "mean_delta": 0.0,
+      "baseline_mean": 1.0,
+      "candidate_mean": 1.0,
+      "interval_95": [
+        0.0,
+        0.0
+      ],
+      "quality_status": "pass",
+      "candidate_p95_ms": 0.14108925,
+      "latency_status": "pass"
+    },
+    {
+      "slice": "tag:digit-4",
+      "n": 28,
+      "mean_delta": 0.0,
+      "baseline_mean": 1.0,
+      "candidate_mean": 1.0,
+      "interval_95": [
+        0.0,
+        0.0
+      ],
+      "quality_status": "pass",
+      "candidate_p95_ms": 0.1422772,
+      "latency_status": "pass"
+    },
+    {
+      "slice": "tag:digit-5",
+      "n": 28,
+      "mean_delta": 0.0,
+      "baseline_mean": 1.0,
+      "candidate_mean": 1.0,
+      "interval_95": [
+        0.0,
+        0.0
+      ],
+      "quality_status": "pass",
+      "candidate_p95_ms": 0.14538069999999997,
+      "latency_status": "pass"
+    },
+    {
+      "slice": "tag:digit-6",
+      "n": 28,
+      "mean_delta": 0.0,
+      "baseline_mean": 0.9642857142857143,
+      "candidate_mean": 0.9642857142857143,
+      "interval_95": [
+        0.0,
+        0.0
+      ],
+      "quality_status": "pass",
+      "candidate_p95_ms": 0.14398585,
+      "latency_status": "pass"
+    },
+    {
+      "slice": "tag:digit-7",
+      "n": 27,
+      "mean_delta": 0.0,
+      "baseline_mean": 0.9629629629629629,
+      "candidate_mean": 0.9629629629629629,
+      "interval_95": [
+        0.0,
+        0.0
+      ],
+      "quality_status": "pass",
+      "candidate_p95_ms": 0.1678662,
+      "latency_status": "pass"
+    },
+    {
+      "slice": "tag:digit-8",
+      "n": 27,
+      "mean_delta": 0.0,
+      "baseline_mean": 0.8518518518518519,
+      "candidate_mean": 0.8518518518518519,
+      "interval_95": [
+        0.0,
+        0.0
+      ],
+      "quality_status": "pass",
+      "candidate_p95_ms": 0.1370002,
+      "latency_status": "pass"
+    },
+    {
+      "slice": "tag:digit-9",
+      "n": 27,
+      "mean_delta": 0.0,
+      "baseline_mean": 0.9629629629629629,
+      "candidate_mean": 0.9629629629629629,
+      "interval_95": [
+        0.0,
+        0.0
+      ],
+      "quality_status": "pass",
+      "candidate_p95_ms": 0.16800009999999999,
+      "latency_status": "pass"
+    }
+  ],
+  "regressions": []
+}
