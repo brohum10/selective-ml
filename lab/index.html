@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Release Lab — SelectiveML</title>
+  <meta name="description" content="Train, compare and audit real models on identical test inputs.">
+  <link rel="stylesheet" href="/lab.css"><script src="/lab.js" defer></script>
+</head>
+<body>
+<main>
+  <header><a class="brand" href="/">SELECTIVE<span>ML</span><small>RELEASE LAB / LOCAL</small></a><span id="status" class="status">Ready</span></header>
+  <section class="intro" aria-labelledby="title"><p class="eyebrow">REAL MODELS. IDENTICAL INPUTS. INSPECTABLE DECISIONS.</p><h1 id="title">A better score.<br>Enough evidence?</h1><p class="lede">Compare a linear classifier and a neural network on the same clean cases. Keep the uncertainty visible.</p>
+  <div class="actions"><button id="run">Run real experiment <span aria-hidden="true">↗</span></button><button id="view-results" class="secondary" hidden>View all results</button><a id="download" href="/api/evidence.zip" hidden>Download evidence ZIP</a></div>
+  <p class="scope">Public 8×8 digits · 3 fixed seeds · 120 training epochs · no API calls</p></section>
+  <section class="console" aria-label="Actual execution log"><div class="console-head"><span>EXECUTION LOG</span><span id="log-state">Awaiting run</span></div><pre id="events" aria-live="polite">Click Run. Models will be trained and compared on this machine.</pre></section>
+  <p id="error" role="alert" hidden></p>
+  <section id="results" hidden aria-labelledby="results-title"><div class="section-title"><div><p class="eyebrow">EVERY PLANNED SEED / NO BEST-RUN SELECTION</p><h2 id="results-title">Better accuracy ≠ automatic approval.</h2></div></div>
+    <div class="table-wrap"><table><thead><tr><th>Seed</th><th>Linear V1</th><th>Neural V2</th><th>Check result</th><th>Inspect</th></tr></thead><tbody id="runs"></tbody></table></div>
+    <p class="fine">Each test split has 275 cases. Splits overlap across seeds; results are not pooled. PASS means the configured empirical checks passed—not production safety.</p>
+    <section class="inspector" aria-label="Selected run"><div class="inspector-head"><div><p id="selected-label" class="eyebrow">SEED 42</p><h2 id="decision-title">Inspect the decision</h2></div><span id="decision-badge" class="badge"></span></div>
+      <nav class="tabs" aria-label="Inspection sections"><button data-panel="gate" aria-pressed="true">Release check</button><button data-panel="policy" aria-pressed="false">Review policy</button><button data-panel="evidence" aria-pressed="false">Evidence</button></nav>
+      <div id="gate-panel" class="panel"><div id="gate-summary"></div><div id="blockers"></div><details><summary>See all class-level checks</summary><div id="slices" class="slice-list"></div></details></div>
+      <div id="policy-panel" class="panel" hidden><div id="policy-summary"></div><div id="review-example"></div><p class="fine">Threshold learned on the policy split, never the test split. A deferral is a signal, not a human-review service or a guarantee. All three seed outcomes remain visible above.</p></div>
+      <div id="evidence-panel" class="panel" hidden><p class="eyebrow">COMPLETE, MACHINE-READABLE RECORD</p><h3>Inspect it. Re-run it.</h3><p>Exported models, row IDs, both sets of predictions, paired JSONL inputs, comparator reports, controls and SHA-256 manifests.</p><a href="/api/report" target="_blank" rel="noopener">Open raw JSON report ↗</a><pre id="provenance"></pre></div>
+    </section>
+    <details class="stress"><summary>Separate noise stress test — not the release comparison</summary><p>Gaussian corruption can change what an 8×8 digit looks like. Original labels are retained; label preservation has not been established. These figures measure agreement with original labels, not a verified real-world robustness guarantee.</p><div id="stress-results"></div></details>
+  </section>
+  <footer><strong>Limits are part of the result.</strong><p>Retrospective educational benchmark, not a blind holdout or unseen-writer evaluation. Approximate bootstrap intervals are unadjusted per slice. Calibration can worsen held-out likelihood. No automatic deployment is implemented.</p><p>Dataset: UCI Optical Recognition of Handwritten Digits / scikit-learn subset, CC BY 4.0. Project developed with AI assistance.</p></footer>
+</main>
+</body></html>
