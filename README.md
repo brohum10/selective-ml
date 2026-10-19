@@ -1,10 +1,29 @@
 # SelectiveML
 
+[![Tests](https://github.com/brohum10/selective-ml/actions/workflows/tests.yml/badge.svg)](https://github.com/brohum10/selective-ml/actions/workflows/tests.yml)
+
 **A model should know when to ask for help. How do you measure whether it does?**
 
 A compact, inspectable ML engineering project: train a neural classifier from scratch, calibrate its confidence, choose a review threshold without touching the test set, and expose where that policy breaks. NumPy is the only dependency. No API keys, downloaded model weights, or private data.
 
+## Watch the 40-second walkthrough
+
+[![97% accurate. Still confidently wrong.](media/SelectiveML-Cover.png)](https://github.com/brohum10/selective-ml/raw/refs/heads/main/media/SelectiveML-LinkedIn-Demo.mp4)
+
+**[Watch the demo](https://github.com/brohum10/selective-ml/raw/refs/heads/main/media/SelectiveML-LinkedIn-Demo.mp4)** · [Inspect the recorded gate result](media/gate.json) · [Demo scope and attribution](media/README.md)
+
+Real neural-network inference → simulated input corruption → all 275 held-out
+cases → a paired evaluation gate. The captioned video is a visual replay of actual
+local outputs, not a production deployment or a screen recording. The model's
+confidence rises from 60.7% to 96.1% on one selected example while its answer changes
+from the correct digit **3** to the incorrect digit **8**.
+
+<details>
+<summary>See the full three-seed experiment dashboard</summary>
+
 ![Measured experiment results](results/reference/dashboard.svg)
+
+</details>
 
 ## Results, not just a demo
 
@@ -34,6 +53,58 @@ python selective_ml.py predict --model results/local/model.json --input results/
 
 On Windows use `.venv\Scripts\activate` and omit the environment-variable prefix. Inspect `results/local/dashboard.svg` and `metrics.json`. The checked-in model also runs immediately using the same predict command with `results/reference`.
 
+## Reproduce the inference-to-release-gate walkthrough
+
+```sh
+python walkthrough.py --output results/walkthrough
+```
+
+This runs the frozen seed-42 model on **all 275 held-out images**, then the same
+images with seeded Gaussian noise (sigma 0.2 on normalized pixels, clipped to
+[0, 1]). It exports the actual predictions, input pixels, model fingerprint,
+measured per-example inference wall times, and paired evaluation files. No
+retraining, API keys, fabricated model outputs, or manual score entry is involved.
+The default run reproduces 7 clean errors versus 27 noisy-input errors. These are
+small-dataset robustness results, not production or realistic OOD measurements.
+For its selected failure example, the trace also records 41 real forward passes
+as noise increases from zero to the configured sigma. Displayed confidence values
+come from those predictions, not animation interpolation.
+
+With [EvalDelta](https://github.com/brohum10/evaldelta) in a sibling directory:
+
+```sh
+python verify_gate.py --evaldelta ../evaldelta/evaldelta.py
+```
+
+The integration verifier checks three distinct CLI outcomes: noise stress blocks
+(exit 1), an identical-run control passes (exit 0), and a changed case hash is
+rejected (exit 2). It writes fresh `gate.json`, `control.json`, and `integration.json`
+beside the prediction trace. A successful verifier exits 0 after confirming all
+three outcomes. The GitHub Actions workflow runs these checks on Python 3.12 and
+3.14 against a pinned EvalDelta revision and retains generated evidence artifacts.
+
+To invoke the comparator directly instead:
+
+```sh
+python ../evaldelta/evaldelta.py results/walkthrough/baseline.jsonl \
+  results/walkthrough/candidate.jsonl --margin 0.02 --min-cases 20 \
+  --samples 2000 --seed 42 --max-p95-ms 1000 > results/walkthrough/gate.json
+```
+
+Exit **1** means the gate blocked the comparison; it is the expected result of
+this stress test, not a failed installation. The candidate is the same model
+behind a corrupted-input pipeline, **not a new model version**. Case hashes cover
+the original task and answer; digit-class slices remain aligned across runs.
+The 1,000 ms budget is a configured bound, not a claimed serving SLA. Exact
+timings and their report fingerprints vary by machine and run.
+
+The frozen seed-42 learned threshold is **0**, so it accepts every example—even
+some confident mistakes. This is intentionally visible: uncertainty-based
+deferral is not a correctness guarantee. The exported `featured_row` follows a
+documented deterministic rule to illustrate one failure; aggregate metrics use
+the whole test set. The approximate per-slice bootstrap intervals are unadjusted
+and should not be interpreted as production safety certificates.
+
 ## Architecture and protocol
 
 ```text
@@ -59,6 +130,8 @@ Checksum-verified pixels, divided by the fixed constant 16
 - [`splits.json`](results/reference/splits.json): exact row membership for seed 42; other seeds reproduce deterministically.
 - [`model.json`](results/reference/model.json): seed-42 weights, temperature and policy; no “best-seed” selection.
 - [`test_selective_ml.py`](test_selective_ml.py): gradient checks, data integrity, split independence, policy failure, calibration objective, reproducibility, tiny-set overfit, safe input handling and artifact round trip.
+- [`test_walkthrough.py`](test_walkthrough.py): paired export integrity, exact seed-42 split, seeded noise, reproducible failure selection, and actual noise-sweep inference.
+- [`verify_gate.py`](verify_gate.py): executable pass/block/invalid integration checks with EvalDelta.
 - [`MODEL_CARD.md`](MODEL_CARD.md): limitations and intended use.
 
 ## What I would improve next
