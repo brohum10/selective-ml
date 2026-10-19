@@ -1,0 +1,838 @@
+{
+  "version": 2,
+  "created_utc": "2026-10-19T21:53:48.591629+00:00",
+  "protocol": {
+    "version": 1,
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "epochs": 120,
+    "baseline": "linear-softmax",
+    "candidate": "relu-mlp-64",
+    "policy_target": 0.98,
+    "policy_min_coverage": 0.5,
+    "gate": {
+      "margin": 0.02,
+      "min_cases": 20,
+      "samples": 2000,
+      "seed": 42,
+      "max_p95_ms": 1000
+    },
+    "noise_sigma": 0.2,
+    "evaldelta_sha256": "82870b5ca827ff1a57640c79832d916f5daac31cce47cd9bcc162c0e2b7fb97e",
+    "scope": "Retrospective educational comparison on an already explored public dataset. Not a blind benchmark, production release approval, or an unseen-writer evaluation."
+  },
+  "protocol_sha256": "b794f3be92ad05299685c15fedfac2658519e7754342e4ad78b3f7cb87bfb3e7",
+  "dataset_sha256": "09f66e6debdee2cd2b5ae59e0d6abbb73fc2b0e0185d2e1957e9ebb51e23aa22",
+  "comparator_sha256": "82870b5ca827ff1a57640c79832d916f5daac31cce47cd9bcc162c0e2b7fb97e",
+  "environment": {
+    "python": "3.12.14",
+    "numpy": "2.5.2",
+    "platform": "macOS-26.6.2-arm64-arm-64bit"
+  },
+  "source_sha256": {
+    "selective_ml.py": "4fd694b7664e72f74298ec67d1ba9ab004fd7fbeb29ff9d8e6261f45311b72e2",
+    "release_lab.py": "3313397a8e59fa0fba4d124b0a353e9e5b77f94f0087ce9b62ffbfbe7a5364bb",
+    "walkthrough.py": "018ea988722fb89c0af40dabb2aa08d752f2f2c1d0de2ad3883e78c892752ac1",
+    "lab_protocol.json": "dc89fc42f3385f73c65622eaaf5adc2465544e0c1c29b4591f3ed42f33497734"
+  },
+  "primary_seed": 42,
+  "selection_rule": "Primary seed fixed at 42. First changed row in that seed; first deferred row in seed order 42/43/44. No best-seed selection.",
+  "limitations": [
+    "Retrospective educational dataset; not a blind holdout claim.",
+    "Test sets overlap across seeds; do not pool observations.",
+    "Random row splits do not establish unseen-writer generalization.",
+    "Gate intervals are approximate and unadjusted per slice.",
+    "BLOCK can mean insufficient evidence, not a statistically established regression.",
+    "Selective deferral is a signal, not an implemented human review service or correctness guarantee."
+  ],
+  "events": [
+    {
+      "sequence": 1,
+      "message": "Verified dataset checksum and fixed protocol: seeds 42, 43, 44."
+    },
+    {
+      "sequence": 2,
+      "message": "Seed 42: training linear V1 and neural V2 on the same 984 training rows."
+    },
+    {
+      "sequence": 3,
+      "message": "Seed 42: comparing 275 identical clean cases with the actual EvalDelta CLI."
+    },
+    {
+      "sequence": 4,
+      "message": "Seed 42: 96.36% -> 97.45%; gate PASS."
+    },
+    {
+      "sequence": 5,
+      "message": "Seed 43: training linear V1 and neural V2 on the same 984 training rows."
+    },
+    {
+      "sequence": 6,
+      "message": "Seed 43: comparing 275 identical clean cases with the actual EvalDelta CLI."
+    },
+    {
+      "sequence": 7,
+      "message": "Seed 43: 96.00% -> 97.45%; gate BLOCK."
+    },
+    {
+      "sequence": 8,
+      "message": "Seed 44: training linear V1 and neural V2 on the same 984 training rows."
+    },
+    {
+      "sequence": 9,
+      "message": "Seed 44: comparing 275 identical clean cases with the actual EvalDelta CLI."
+    },
+    {
+      "sequence": 10,
+      "message": "Seed 44: 95.64% -> 97.82%; gate PASS."
+    },
+    {
+      "sequence": 11,
+      "message": "Complete. Saved models, exact predictions, aligned cases, gate reports, and file hashes."
+    }
+  ],
+  "runs": [
+    {
+      "seed": 42,
+      "n": 275,
+      "split_counts": {
+        "train": 984,
+        "calibration": 268,
+        "policy": 270,
+        "test": 275
+      },
+      "baseline_accuracy": 0.9636363636363636,
+      "candidate_accuracy": 0.9745454545454545,
+      "gate": {
+        "version": 1,
+        "decision": "pass",
+        "baseline_run": "linear-v1",
+        "candidate_run": "neural-v2",
+        "suite": "digits-seed42-test-v2",
+        "scorer": "exact-match-v1",
+        "baseline_sha256": "33fecfce3bee9cb0a85a974c8fc5ad85d4b557650705520b03ac14d3e7b0666d",
+        "candidate_sha256": "fdcbe3120cc522da133f8d86a9b27f06e9750e007e88a856ef23a381dafc3664",
+        "config": {
+          "margin": 0.02,
+          "min_cases": 20,
+          "samples": 2000,
+          "seed": 42,
+          "max_p95_ms": 1000.0
+        },
+        "method": "paired percentile bootstrap; unadjusted per-slice 95% intervals",
+        "blockers": [],
+        "slices": [
+          {
+            "slice": "overall",
+            "n": 275,
+            "mean_delta": 0.01090909090909091,
+            "baseline_mean": 0.9636363636363636,
+            "candidate_mean": 0.9745454545454545,
+            "interval_95": [
+              0.0,
+              0.025454545454545455
+            ],
+            "quality_status": "pass",
+            "candidate_p95_ms": 0.0098333,
+            "latency_status": "pass"
+          },
+          {
+            "slice": "tag:digit-0",
+            "n": 27,
+            "mean_delta": 0.0,
+            "baseline_mean": 1.0,
+            "candidate_mean": 1.0,
+            "interval_95": [
+              0.0,
+              0.0
+            ],
+            "quality_status": "pass",
+            "candidate_p95_ms": 0.0095707,
+            "latency_status": "pass"
+          },
+          {
+            "slice": "tag:digit-1",
+            "n": 28,
+            "mean_delta": 0.0,
+            "baseline_mean": 1.0,
+            "candidate_mean": 1.0,
+            "interval_95": [
+              0.0,
+              0.0
+            ],
+            "quality_status": "pass",
+            "candidate_p95_ms": 0.00973565,
+            "latency_status": "pass"
+          },
+          {
+            "slice": "tag:digit-2",
+            "n": 27,
+            "mean_delta": 0.0,
+            "baseline_mean": 1.0,
+            "candidate_mean": 1.0,
+            "interval_95": [
+              0.0,
+              0.0
+            ],
+            "quality_status": "pass",
+            "candidate_p95_ms": 0.0096954,
+            "latency_status": "pass"
+          },
+          {
+            "slice": "tag:digit-3",
+            "n": 28,
+            "mean_delta": 0.03571428571428571,
+            "baseline_mean": 0.9642857142857143,
+            "candidate_mean": 1.0,
+            "interval_95": [
+              0.0,
+              0.10714285714285714
+            ],
+            "quality_status": "pass",
+            "candidate_p95_ms": 0.009708,
+            "latency_status": "pass"
+          },
+          {
+            "slice": "tag:digit-4",
+            "n": 28,
+            "mean_delta": 0.0,
+            "baseline_mean": 1.0,
+            "candidate_mean": 1.0,
+            "interval_95": [
+              0.0,
+              0.0
+            ],
+            "quality_status": "pass",
+            "candidate_p95_ms": 0.00974825,
+            "latency_status": "pass"
+          },
+          {
+            "slice": "tag:digit-5",
+            "n": 28,
+            "mean_delta": 0.03571428571428571,
+            "baseline_mean": 0.9642857142857143,
+            "candidate_mean": 1.0,
+            "interval_95": [
+              0.0,
+              0.10714285714285714
+            ],
+            "quality_status": "pass",
+            "candidate_p95_ms": 0.0099419,
+            "latency_status": "pass"
+          },
+          {
+            "slice": "tag:digit-6",
+            "n": 28,
+            "mean_delta": 0.0,
+            "baseline_mean": 0.9642857142857143,
+            "candidate_mean": 0.9642857142857143,
+            "interval_95": [
+              0.0,
+              0.0
+            ],
+            "quality_status": "pass",
+            "candidate_p95_ms": 0.0097206,
+            "latency_status": "pass"
+          },
+          {
+            "slice": "tag:digit-7",
+            "n": 27,
+            "mean_delta": 0.037037037037037035,
+            "baseline_mean": 0.9259259259259259,
+            "candidate_mean": 0.9629629629629629,
+            "interval_95": [
+              0.0,
+              0.1111111111111111
+            ],
+            "quality_status": "pass",
+            "candidate_p95_ms": 0.011890999999999999,
+            "latency_status": "pass"
+          },
+          {
+            "slice": "tag:digit-8",
+            "n": 27,
+            "mean_delta": 0.0,
+            "baseline_mean": 0.8518518518518519,
+            "candidate_mean": 0.8518518518518519,
+            "interval_95": [
+              0.0,
+              0.0
+            ],
+            "quality_status": "pass",
+            "candidate_p95_ms": 0.009921500000000001,
+            "latency_status": "pass"
+          },
+          {
+            "slice": "tag:digit-9",
+            "n": 27,
+            "mean_delta": 0.0,
+            "baseline_mean": 0.9629629629629629,
+            "candidate_mean": 0.9629629629629629,
+            "interval_95": [
+              0.0,
+              0.0
+            ],
+            "quality_status": "pass",
+            "candidate_p95_ms": 0.009625,
+            "latency_status": "pass"
+          }
+        ],
+        "regressions": []
+      },
+      "control_decision": "pass",
+      "models": {
+        "baseline": {
+          "temperature": 0.6155722066724582,
+          "threshold": 0.5213991174291287,
+          "architecture": "linear-softmax",
+          "sha256": "ccdd892a3e66f06d90af4c9d0bfa4a81ae3906dd57faca355106a2bc9c78eee8",
+          "nll_before": 0.19235165356241618,
+          "nll_after": 0.1628981481412429
+        },
+        "candidate": {
+          "temperature": 0.9330329915368075,
+          "threshold": 0.0,
+          "architecture": "relu-mlp-64",
+          "sha256": "24f78246e26eb73961b3b1140ee29849dce9dd8426fef5f60302a600fff862d3",
+          "nll_before": 0.11015844241132457,
+          "nll_after": 0.11220470187234596
+        }
+      },
+      "policy": {
+        "baseline": {
+          "total": 275,
+          "accepted": 268,
+          "deferred": 7,
+          "coverage": 0.9745454545454545,
+          "accepted_accuracy": 0.9701492537313433,
+          "accepted_errors": 8,
+          "deferred_errors": 2,
+          "deferred_correct": 5
+        },
+        "candidate": {
+          "total": 275,
+          "accepted": 275,
+          "deferred": 0,
+          "coverage": 1.0,
+          "accepted_accuracy": 0.9745454545454545,
+          "accepted_errors": 7,
+          "deferred_errors": 0,
+          "deferred_correct": 0
+        }
+      },
+      "noise_stress": {
+        "sigma": 0.2,
+        "scope": "Label agreement only; not a release comparison or verified label-preserving corruption.",
+        "agreement_with_original_labels": 0.9018181818181819
+      }
+    },
+    {
+      "seed": 43,
+      "n": 275,
+      "split_counts": {
+        "train": 984,
+        "calibration": 268,
+        "policy": 270,
+        "test": 275
+      },
+      "baseline_accuracy": 0.96,
+      "candidate_accuracy": 0.9745454545454545,
+      "gate": {
+        "version": 1,
+        "decision": "block",
+        "baseline_run": "linear-v1",
+        "candidate_run": "neural-v2",
+        "suite": "digits-seed43-test-v2",
+        "scorer": "exact-match-v1",
+        "baseline_sha256": "070dab7cb836789603c046bb6dea4758498560e3e40664406185c012bdc97b74",
+        "candidate_sha256": "01e10b45714d6446b443f2eba9ab9a5e9878a9e1e0fd5766ebadf1eec632bfe7",
+        "config": {
+          "margin": 0.02,
+          "min_cases": 20,
+          "samples": 2000,
+          "seed": 42,
+          "max_p95_ms": 1000.0
+        },
+        "method": "paired percentile bootstrap; unadjusted per-slice 95% intervals",
+        "blockers": [
+          {
+            "slice": "tag:digit-5",
+            "quality": "inconclusive",
+            "latency": "pass"
+          }
+        ],
+        "slices": [
+          {
+            "slice": "overall",
+            "n": 275,
+            "mean_delta": 0.014545454545454545,
+            "baseline_mean": 0.96,
+            "candidate_mean": 0.9745454545454545,
+            "interval_95": [
+              0.0,
+              0.03272727272727273
+            ],
+            "quality_status": "pass",
+            "candidate_p95_ms": 0.0109296,
+            "latency_status": "pass"
+          },
+          {
+            "slice": "tag:digit-0",
+            "n": 27,
+            "mean_delta": 0.0,
+            "baseline_mean": 1.0,
+            "candidate_mean": 1.0,
+            "interval_95": [
+              0.0,
+              0.0
+            ],
+            "quality_status": "pass",
+            "candidate_p95_ms": 0.05186259999999997,
+            "latency_status": "pass"
+          },
+          {
+            "slice": "tag:digit-1",
+            "n": 28,
+            "mean_delta": 0.03571428571428571,
+            "baseline_mean": 0.9642857142857143,
+            "candidate_mean": 1.0,
+            "interval_95": [
+              0.0,
+              0.10714285714285714
+            ],
+            "quality_status": "pass",
+            "candidate_p95_ms": 0.0104706,
+            "latency_status": "pass"
+          },
+          {
+            "slice": "tag:digit-2",
+            "n": 27,
+            "mean_delta": 0.0,
+            "baseline_mean": 1.0,
+            "candidate_mean": 1.0,
+            "interval_95": [
+              0.0,
+              0.0
+            ],
+            "quality_status": "pass",
+            "candidate_p95_ms": 0.010254399999999999,
+            "latency_status": "pass"
+          },
+          {
+            "slice": "tag:digit-3",
+            "n": 28,
+            "mean_delta": 0.07142857142857142,
+            "baseline_mean": 0.9285714285714286,
+            "candidate_mean": 1.0,
+            "interval_95": [
+              0.0,
+              0.17857142857142858
+            ],
+            "quality_status": "pass",
+            "candidate_p95_ms": 0.01008125,
+            "latency_status": "pass"
+          },
+          {
+            "slice": "tag:digit-4",
+            "n": 28,
+            "mean_delta": 0.03571428571428571,
+            "baseline_mean": 0.9285714285714286,
+            "candidate_mean": 0.9642857142857143,
+            "interval_95": [
+              0.0,
+              0.10714285714285714
+            ],
+            "quality_status": "pass",
+            "candidate_p95_ms": 0.00995625,
+            "latency_status": "pass"
+          },
+          {
+            "slice": "tag:digit-5",
+            "n": 28,
+            "mean_delta": -0.03571428571428571,
+            "baseline_mean": 1.0,
+            "candidate_mean": 0.9642857142857143,
+            "interval_95": [
+              -0.10714285714285714,
+              0.0
+            ],
+            "quality_status": "inconclusive",
+            "candidate_p95_ms": 0.011791549999999998,
+            "latency_status": "pass"
+          },
+          {
+            "slice": "tag:digit-6",
+            "n": 28,
+            "mean_delta": 0.0,
+            "baseline_mean": 0.9642857142857143,
+            "candidate_mean": 0.9642857142857143,
+            "interval_95": [
+              0.0,
+              0.0
+            ],
+            "quality_status": "pass",
+            "candidate_p95_ms": 0.01006655,
+            "latency_status": "pass"
+          },
+          {
+            "slice": "tag:digit-7",
+            "n": 27,
+            "mean_delta": 0.0,
+            "baseline_mean": 1.0,
+            "candidate_mean": 1.0,
+            "interval_95": [
+              0.0,
+              0.0
+            ],
+            "quality_status": "pass",
+            "candidate_p95_ms": 0.0109794,
+            "latency_status": "pass"
+          },
+          {
+            "slice": "tag:digit-8",
+            "n": 27,
+            "mean_delta": 0.0,
+            "baseline_mean": 0.8888888888888888,
+            "candidate_mean": 0.8888888888888888,
+            "interval_95": [
+              0.0,
+              0.0
+            ],
+            "quality_status": "pass",
+            "candidate_p95_ms": 0.0110752,
+            "latency_status": "pass"
+          },
+          {
+            "slice": "tag:digit-9",
+            "n": 27,
+            "mean_delta": 0.037037037037037035,
+            "baseline_mean": 0.9259259259259259,
+            "candidate_mean": 0.9629629629629629,
+            "interval_95": [
+              0.0,
+              0.1111111111111111
+            ],
+            "quality_status": "pass",
+            "candidate_p95_ms": 0.0108417,
+            "latency_status": "pass"
+          }
+        ],
+        "regressions": [
+          {
+            "id": "digits-row-1575",
+            "delta": -1,
+            "tags": [
+              "digit-5"
+            ]
+          }
+        ]
+      },
+      "control_decision": "pass",
+      "models": {
+        "baseline": {
+          "temperature": 0.5358867312681466,
+          "threshold": 0.6428286543436039,
+          "architecture": "linear-softmax",
+          "sha256": "c9df8ced5683a9e1d11bf0f6a2d1faf618dc5022d51e8ea5dffb9a1081919581",
+          "nll_before": 0.1571767546118504,
+          "nll_after": 0.1345251268674835
+        },
+        "candidate": {
+          "temperature": 1.0533610359548358,
+          "threshold": 0.5492933736263179,
+          "architecture": "relu-mlp-64",
+          "sha256": "f1af5e853c9159e005060743f46f83373ea2b9c607561a5ece82488d7bd5d81b",
+          "nll_before": 0.08876050262215929,
+          "nll_after": 0.08752429797368995
+        }
+      },
+      "policy": {
+        "baseline": {
+          "total": 275,
+          "accepted": 264,
+          "deferred": 11,
+          "coverage": 0.96,
+          "accepted_accuracy": 0.9848484848484849,
+          "accepted_errors": 4,
+          "deferred_errors": 7,
+          "deferred_correct": 4
+        },
+        "candidate": {
+          "total": 275,
+          "accepted": 274,
+          "deferred": 1,
+          "coverage": 0.9963636363636363,
+          "accepted_accuracy": 0.9781021897810219,
+          "accepted_errors": 6,
+          "deferred_errors": 1,
+          "deferred_correct": 0
+        }
+      },
+      "noise_stress": {
+        "sigma": 0.2,
+        "scope": "Label agreement only; not a release comparison or verified label-preserving corruption.",
+        "agreement_with_original_labels": 0.9381818181818182
+      }
+    },
+    {
+      "seed": 44,
+      "n": 275,
+      "split_counts": {
+        "train": 984,
+        "calibration": 268,
+        "policy": 270,
+        "test": 275
+      },
+      "baseline_accuracy": 0.9563636363636364,
+      "candidate_accuracy": 0.9781818181818182,
+      "gate": {
+        "version": 1,
+        "decision": "pass",
+        "baseline_run": "linear-v1",
+        "candidate_run": "neural-v2",
+        "suite": "digits-seed44-test-v2",
+        "scorer": "exact-match-v1",
+        "baseline_sha256": "627faaf25879f7330e8cc29c71d235da0a587413d99b79524f7ac08d2453ba62",
+        "candidate_sha256": "6a9f942e8a84ac8f7b470384d9eeda8bb3ef1c22201ba25d1cdc33971271f72a",
+        "config": {
+          "margin": 0.02,
+          "min_cases": 20,
+          "samples": 2000,
+          "seed": 42,
+          "max_p95_ms": 1000.0
+        },
+        "method": "paired percentile bootstrap; unadjusted per-slice 95% intervals",
+        "blockers": [],
+        "slices": [
+          {
+            "slice": "overall",
+            "n": 275,
+            "mean_delta": 0.02181818181818182,
+            "baseline_mean": 0.9563636363636364,
+            "candidate_mean": 0.9781818181818182,
+            "interval_95": [
+              0.007272727272727273,
+              0.04
+            ],
+            "quality_status": "pass",
+            "candidate_p95_ms": 0.012212600000000004,
+            "latency_status": "pass"
+          },
+          {
+            "slice": "tag:digit-0",
+            "n": 27,
+            "mean_delta": 0.037037037037037035,
+            "baseline_mean": 0.9629629629629629,
+            "candidate_mean": 1.0,
+            "interval_95": [
+              0.0,
+              0.1111111111111111
+            ],
+            "quality_status": "pass",
+            "candidate_p95_ms": 0.011654399999999997,
+            "latency_status": "pass"
+          },
+          {
+            "slice": "tag:digit-1",
+            "n": 28,
+            "mean_delta": 0.07142857142857142,
+            "baseline_mean": 0.9285714285714286,
+            "candidate_mean": 1.0,
+            "interval_95": [
+              0.0,
+              0.17857142857142858
+            ],
+            "quality_status": "pass",
+            "candidate_p95_ms": 0.021576750000000002,
+            "latency_status": "pass"
+          },
+          {
+            "slice": "tag:digit-2",
+            "n": 27,
+            "mean_delta": 0.037037037037037035,
+            "baseline_mean": 0.9629629629629629,
+            "candidate_mean": 1.0,
+            "interval_95": [
+              0.0,
+              0.1111111111111111
+            ],
+            "quality_status": "pass",
+            "candidate_p95_ms": 0.014012699999999998,
+            "latency_status": "pass"
+          },
+          {
+            "slice": "tag:digit-3",
+            "n": 28,
+            "mean_delta": 0.03571428571428571,
+            "baseline_mean": 0.9642857142857143,
+            "candidate_mean": 1.0,
+            "interval_95": [
+              0.0,
+              0.10714285714285714
+            ],
+            "quality_status": "pass",
+            "candidate_p95_ms": 0.012102299999999996,
+            "latency_status": "pass"
+          },
+          {
+            "slice": "tag:digit-4",
+            "n": 28,
+            "mean_delta": 0.0,
+            "baseline_mean": 0.9642857142857143,
+            "candidate_mean": 0.9642857142857143,
+            "interval_95": [
+              0.0,
+              0.0
+            ],
+            "quality_status": "pass",
+            "candidate_p95_ms": 0.0097182,
+            "latency_status": "pass"
+          },
+          {
+            "slice": "tag:digit-5",
+            "n": 28,
+            "mean_delta": 0.0,
+            "baseline_mean": 0.9642857142857143,
+            "candidate_mean": 0.9642857142857143,
+            "interval_95": [
+              0.0,
+              0.0
+            ],
+            "quality_status": "pass",
+            "candidate_p95_ms": 0.01171655,
+            "latency_status": "pass"
+          },
+          {
+            "slice": "tag:digit-6",
+            "n": 28,
+            "mean_delta": 0.0,
+            "baseline_mean": 1.0,
+            "candidate_mean": 1.0,
+            "interval_95": [
+              0.0,
+              0.0
+            ],
+            "quality_status": "pass",
+            "candidate_p95_ms": 0.0099706,
+            "latency_status": "pass"
+          },
+          {
+            "slice": "tag:digit-7",
+            "n": 27,
+            "mean_delta": 0.0,
+            "baseline_mean": 0.9629629629629629,
+            "candidate_mean": 0.9629629629629629,
+            "interval_95": [
+              0.0,
+              0.0
+            ],
+            "quality_status": "pass",
+            "candidate_p95_ms": 0.009966299999999999,
+            "latency_status": "pass"
+          },
+          {
+            "slice": "tag:digit-8",
+            "n": 27,
+            "mean_delta": 0.037037037037037035,
+            "baseline_mean": 0.9259259259259259,
+            "candidate_mean": 0.9629629629629629,
+            "interval_95": [
+              0.0,
+              0.1111111111111111
+            ],
+            "quality_status": "pass",
+            "candidate_p95_ms": 0.01701679999999999,
+            "latency_status": "pass"
+          },
+          {
+            "slice": "tag:digit-9",
+            "n": 27,
+            "mean_delta": 0.0,
+            "baseline_mean": 0.9259259259259259,
+            "candidate_mean": 0.9259259259259259,
+            "interval_95": [
+              0.0,
+              0.0
+            ],
+            "quality_status": "pass",
+            "candidate_p95_ms": 0.0100374,
+            "latency_status": "pass"
+          }
+        ],
+        "regressions": []
+      },
+      "control_decision": "pass",
+      "models": {
+        "baseline": {
+          "temperature": 0.5452538663326288,
+          "threshold": 0.6830903316868547,
+          "architecture": "linear-softmax",
+          "sha256": "b2feae504ca78cbce8f68ae6a2e0a9a6451befaa394fa1aed1894d5877aac1b3",
+          "nll_before": 0.18030886282989456,
+          "nll_after": 0.1637534797326504
+        },
+        "candidate": {
+          "temperature": 0.79829838635665,
+          "threshold": 0.710219888361886,
+          "architecture": "relu-mlp-64",
+          "sha256": "3b174371b8e51b3fdd33bfdabaa9e72b854f8c365c37c2c7d506f562696c786b",
+          "nll_before": 0.11595523576361476,
+          "nll_after": 0.1314182496639519
+        }
+      },
+      "policy": {
+        "baseline": {
+          "total": 275,
+          "accepted": 267,
+          "deferred": 8,
+          "coverage": 0.9709090909090909,
+          "accepted_accuracy": 0.9700374531835206,
+          "accepted_errors": 8,
+          "deferred_errors": 4,
+          "deferred_correct": 4
+        },
+        "candidate": {
+          "total": 275,
+          "accepted": 268,
+          "deferred": 7,
+          "coverage": 0.9745454545454545,
+          "accepted_accuracy": 0.9850746268656716,
+          "accepted_errors": 4,
+          "deferred_errors": 2,
+          "deferred_correct": 5
+        }
+      },
+      "noise_stress": {
+        "sigma": 0.2,
+        "scope": "Label agreement only; not a release comparison or verified label-preserving corruption.",
+        "agreement_with_original_labels": 0.9418181818181818
+      }
+    }
+  ],
+  "first_deferred_prediction": {
+    "seed": 43,
+    "row": 1628,
+    "label": 4,
+    "candidate": {
+      "prediction": 1,
+      "confidence": 0.32960107435553493,
+      "decision": "review",
+      "probabilities": [
+        4.028330296789318e-05,
+        0.32960107435553493,
+        4.6528468903912056e-05,
+        9.433073672430392e-08,
+        0.28234783808947794,
+        0.0019563072025508854,
+        2.287711871357358e-05,
+        0.05915492530863904,
+        0.27131262819744784,
+        0.05551744362502713
+      ],
+      "latency_ms": 0.009083
+    }
+  }
+}

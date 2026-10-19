@@ -1,0 +1,34 @@
+1
+00:00:00,025 --> 00:00:02,426
+Higher accuracy.
+Gate still says BLOCK.
+
+2
+00:00:02,426 --> 00:00:07,095
+Two actual models.
+The same clean inputs.
+
+3
+00:00:07,095 --> 00:00:11,385
+Three fixed seeds.
+Every outcome shown.
+
+4
+00:00:11,385 --> 00:00:16,467
+Inconclusive ≠ worse.
+This check needs evidence.
+
+5
+00:00:16,467 --> 00:00:20,942
+One mistake deferred.
+Six still accepted.
+
+6
+00:00:20,942 --> 00:00:24,961
+Open the report.
+Inspect the exact evidence.
+
+7
+00:00:24,961 --> 00:00:28,395
+A score is one number.
+The decision needs context.
