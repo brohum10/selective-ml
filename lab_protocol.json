@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "seeds": [42, 43, 44],
+  "epochs": 120,
+  "baseline": "linear-softmax",
+  "candidate": "relu-mlp-64",
+  "policy_target": 0.98,
+  "policy_min_coverage": 0.5,
+  "gate": {
+    "margin": 0.02,
+    "min_cases": 20,
+    "samples": 2000,
+    "seed": 42,
+    "max_p95_ms": 1000
+  },
+  "noise_sigma": 0.2,
+  "evaldelta_sha256": "82870b5ca827ff1a57640c79832d916f5daac31cce47cd9bcc162c0e2b7fb97e",
+  "scope": "Retrospective educational comparison on an already explored public dataset. Not a blind benchmark, production release approval, or an unseen-writer evaluation."
+}
