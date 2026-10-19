@@ -30,7 +30,8 @@ jobs:
       - name: Test the classifier and inference exporter
         run: python -m unittest -v
       - name: Test the pinned comparator
-        run: python -m unittest discover -s tools/evaldelta -v
+        working-directory: tools/evaldelta
+        run: python -m unittest -v
       - run: python selective_ml.py predict --model results/reference/model.json --input results/reference/example.json
       - name: Verify actual pass, block, and invalid-input CLI results
         run: python verify_gate.py --evaldelta tools/evaldelta/evaldelta.py
