@@ -8,6 +8,8 @@ Train a linear classifier and a NumPy neural network, compare them on **identica
 
 ## See the actual app
 
+https://github.com/user-attachments/assets/42dfa6c3-9c81-4966-9d51-111d1a68f1ed
+
 [Watch the approximately 29-second recorded demo](media/SelectiveML-Release-Lab-Demo.mp4) · [Recorded comparison report](media/release-lab-summary.json) · [Scope and reproduction](media/README.md)
 
 The video records the working local interface: actual training, evaluation, inspection and report controls. Title captions are added outside the browser capture. It is not a generated product mockup or a production deployment.
