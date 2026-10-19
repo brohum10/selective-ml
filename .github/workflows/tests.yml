@@ -5,11 +5,39 @@ permissions:
 jobs:
   test:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ['3.12', '3.14']
+    env:
+      OPENBLAS_NUM_THREADS: '1'
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - name: Check out the paired comparator at a fixed revision
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          repository: brohum10/evaldelta
+          ref: 901c809ac52147c5ce4d79006cc720476457d252
+          path: tools/evaldelta
+          persist-credentials: false
       - uses: actions/setup-python@v5
         with:
-          python-version: '3.14'
+          python-version: ${{ matrix.python }}
       - run: python -m pip install -r requirements.txt
-      - run: python -m unittest -v
+      - name: Test the classifier and inference exporter
+        run: python -m unittest -v
+      - name: Test the pinned comparator
+        run: python -m unittest discover -s tools/evaldelta -v
       - run: python selective_ml.py predict --model results/reference/model.json --input results/reference/example.json
+      - name: Verify actual pass, block, and invalid-input CLI results
+        run: python verify_gate.py --evaldelta tools/evaldelta/evaldelta.py
+      - name: Retain reproducible prediction and gate evidence
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: inference-gate-python-${{ matrix.python }}
+          path: results/walkthrough/
+          if-no-files-found: error
+          retention-days: 14
