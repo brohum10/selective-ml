@@ -30,11 +30,11 @@ The second screenshot explores a 95% confidence threshold on seed 43: 20 cases a
 
 ## See the actual app
 
-https://github.com/user-attachments/assets/42dfa6c3-9c81-4966-9d51-111d1a68f1ed
+https://github.com/user-attachments/assets/9b2a3de1-1f50-4d3d-b599-076d86cd2679
 
-[Watch the approximately 29-second recorded demo](media/SelectiveML-Release-Lab-Demo.mp4) · [Recorded comparison report](media/release-lab-summary.json) · [Scope and reproduction](media/README.md)
+[Watch the approximately 36-second workbench demo](media/SelectiveML-Workbench-Demo.mp4) · [Exact demo facts](media/workbench-demo-facts.json) · [Scope and reproduction](media/README.md)
 
-The video records the working local interface before the error-atlas/sandbox extension: actual training, evaluation, inspection and report controls. The new panels are documented above. Title captions are added outside the browser capture. It is not a generated product mockup or a production deployment.
+The video records the working local interface inspecting a completed real experiment: the paired gate, error atlas, exact changed image, confusion matrix, learned policy, exploratory review threshold, confidence bins, evidence exports and all three seed outcomes. Caption bands and a camera close-up of the recorded case card are added in editing. It does not show training in real time. No UI or predictions are generated for the video; it is not a production deployment. [The exact recorded evidence ZIP](media/workbench-demo-evidence.zip) includes all original model outputs and an unsigned integrity manifest. Earlier recordings remain available in the [media history](media/README.md).
 
 ## Run the local interface
 
