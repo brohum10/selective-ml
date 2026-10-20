@@ -1,5 +1,22 @@
 # Model Release Lab: recorded application demo
 
+## Decision workbench extension
+
+The new [error atlas](workbench-error-atlas.png) and
+[review sandbox](workbench-review-sandbox.png) screenshots come from actual local
+app interaction. [Diagnostic JSON](workbench-diagnostics.json) retains every seed,
+the change counts, confusion matrices, confidence bins and exact threshold curves.
+Its source fingerprint identifies `diagnostics.py`. These descriptive outputs
+are separate from the original video/evidence bundle below; the original results
+and manifest have not been overwritten.
+
+The sandbox screenshot explores 95% confidence on seed 43: 20 cases deferred,
+6 errors flagged, 14 correct answers deferred, 1 error still accepted. This is a
+test-set what-if, not policy training or fresh validation. The frozen policy and
+BLOCK result do not change. The video below predates these extra panels.
+
+## Original model-comparison recording
+
 [Watch the 29-second screen recording](SelectiveML-Release-Lab-Demo.mp4)
 
 ![Model Release Lab cover](SelectiveML-Release-Lab-Cover.png)
