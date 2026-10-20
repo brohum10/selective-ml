@@ -1,9 +1,66 @@
 {
-  "scope": "Actual screen recording of a completed local experiment, with explanatory caption bands and a cropped close-up of its recorded case card. No generated UI or predictions.",
+  "scope": "Actual screen recording of a completed local experiment, edited with normal-speed cuts, end-frame reading holds, explanatory caption bands and a cropped close-up of its recorded case card. No generated UI or predictions.",
   "source_revision": "3550d54d75d745fc119f3875610e11b02fbca3a3",
   "recorded_run_created_utc": "2026-10-20T15:00:40.900778+00:00",
-  "recording_duration_seconds": 35.735,
-  "video_sha256": "ba9630b0bd5f11fa63778725c97d068564d4cb9c708954fb0b86f345896e83fd",
+  "source_recording_duration_seconds": 35.735,
+  "recording_duration_seconds": 30.0,
+  "edit_decision_list": {
+    "duration_seconds": 30.0,
+    "source_recording_seconds": 35.735,
+    "editing": "Normal-speed cuts with end-frame reading holds. No synthesized UI or results.",
+    "segments": [
+      {
+        "id": "gate",
+        "time": 0,
+        "source_start": 0.05,
+        "source_end": 2.8,
+        "duration": 4.0
+      },
+      {
+        "id": "atlas",
+        "time": 4.0,
+        "source_start": 3.4,
+        "source_end": 6.5,
+        "duration": 3.75
+      },
+      {
+        "id": "case",
+        "time": 7.75,
+        "source_start": 7.25,
+        "source_end": 10.35,
+        "duration": 4.0
+      },
+      {
+        "id": "policy",
+        "time": 11.75,
+        "source_start": 14.85,
+        "source_end": 17.8,
+        "duration": 4.0
+      },
+      {
+        "id": "tradeoff",
+        "time": 15.75,
+        "source_start": 18.5,
+        "source_end": 24.2,
+        "duration": 6.0
+      },
+      {
+        "id": "evidence",
+        "time": 21.75,
+        "source_start": 29.0,
+        "source_end": 32.4,
+        "duration": 4.25
+      },
+      {
+        "id": "all-seeds",
+        "time": 26.0,
+        "source_start": 33.1,
+        "source_end": 35.7,
+        "duration": 4.0
+      }
+    ]
+  },
+  "video_sha256": "e8f4774a4b6410860312e95937c67574d111af7e1c9f1a2d8d18d36d4bf00241",
   "protocol_sha256": "b794f3be92ad05299685c15fedfac2658519e7754342e4ad78b3f7cb87bfb3e7",
   "source_sha256": {
     "selective_ml.py": "4fd694b7664e72f74298ec67d1ba9ab004fd7fbeb29ff9d8e6261f45311b72e2",
