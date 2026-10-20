@@ -4,7 +4,29 @@
 
 **A higher model score is not the whole release decision.**
 
-Train a linear classifier and a NumPy neural network, compare them on **identical clean test inputs**, and inspect the paired evaluation checks. A local interactive viewer exposes every planned seed, class-level uncertainty, selective-review behavior, and downloadable evidence.
+Train a linear classifier and a NumPy neural network, compare them on **identical clean test inputs**, then investigate the decision in an interactive workbench. Follow model disagreements to the exact image, explore review-workload trade-offs, and verify the exported evidence.
+
+## The decision workbench
+
+- **Error atlas:** filter every prediction by true digit and outcome: improved, regressed, both wrong or both correct. Each image keeps its source row ID, both predictions and the candidate's confidence. Pagination preserves ascending row order rather than selecting dramatic examples.
+- **Review sandbox:** move a confidence threshold and see review workload, errors still accepted, errors flagged, correct predictions deferred, accepted accuracy and coverage. The amber marker preserves the independently learned policy while the mint marker explores alternatives.
+- **Confusion + reliability:** inspect the complete 10×10 candidate confusion matrix and ten fixed confidence bins for the selected seed. Empty bins and empty acceptance stay undefined; descriptive ECE is not a calibration guarantee.
+- **Evidence verifier:** inspect an evidence ZIP without extracting or executing it. Reject changed, extra or missing files, duplicate names/JSON keys, unsafe paths, symlinks and oversized archives. A SHA-256 manifest provides integrity relative to that manifest—not cryptographic authenticity.
+
+The threshold curve uses sorting and prefix sums to enumerate attainable policies in **O(n log n)** time, grouping tied confidence values. The browser uses a binary search to select the matching point. A confidence of exactly 1 is not artificially deferred. No UI framework, hosted API or additional Python dependency is required.
+
+**The sandbox uses test outcomes for retrospective exploration. It never replaces the frozen policy, changes a trained model, or changes a gate result. Selecting a production threshold from this view would be test-set tuning; use separate policy data and fresh evaluation instead.**
+
+<details>
+<summary>See the actual workbench: error atlas + review sandbox</summary>
+
+![Error atlas: all seven candidate mistakes in seed 43](media/workbench-error-atlas.png)
+
+![Review sandbox: exploratory 95% threshold, including unnecessary deferrals](media/workbench-review-sandbox.png)
+
+The second screenshot explores a 95% confidence threshold on seed 43: 20 cases are deferred, including 6 errors and 14 correct answers; 1 error is still accepted. These are **retrospective test counts**, not a newly validated policy. The release gate stays BLOCK. [Inspect the full descriptive diagnostics](media/workbench-diagnostics.json).
+
+</details>
 
 ## See the actual app
 
@@ -12,7 +34,7 @@ https://github.com/user-attachments/assets/42dfa6c3-9c81-4966-9d51-111d1a68f1ed
 
 [Watch the approximately 29-second recorded demo](media/SelectiveML-Release-Lab-Demo.mp4) · [Recorded comparison report](media/release-lab-summary.json) · [Scope and reproduction](media/README.md)
 
-The video records the working local interface: actual training, evaluation, inspection and report controls. Title captions are added outside the browser capture. It is not a generated product mockup or a production deployment.
+The video records the working local interface before the error-atlas/sandbox extension: actual training, evaluation, inspection and report controls. The new panels are documented above. Title captions are added outside the browser capture. It is not a generated product mockup or a production deployment.
 
 ## Run the local interface
 
@@ -119,6 +141,24 @@ Each new run writes:
 
 Timing records are local per-example inference wall times, including NumPy conversion. They are not serving benchmarks or SLA claims. Timing-dependent hashes can vary across runs.
 
+### Verify the recorded bundle
+
+```sh
+python audit_evidence.py media/release-lab-evidence.zip
+```
+
+Exit 0 means all listed files match the unsigned manifest and the planned seed evidence is present. Exit 2 means invalid, incomplete or changed evidence. The verifier is standard-library-only, does not extract anything, and caps archives at 200 members / 64 MB expanded. Replacing both files and hashes can defeat this integrity check; it is not a signature or proof of scientifically valid results.
+
+### Export descriptive diagnostics
+
+After a fresh command-line run:
+
+```sh
+python diagnostics.py --report results/release-lab/my-new-run/summary.json --output results/diagnostics.json
+```
+
+The output path must be new. In the interface, **Evidence → Diagnostic JSON** downloads the same analysis schema. Diagnostics are separate from the original evidence bundle so the original manifest and results stay intact. The frozen model/version comparison and recorded video are preserved unchanged.
+
 The original [three-seed metrics](results/reference/metrics.json), [seed-42 artifact](results/reference/model.json), and [model card](MODEL_CARD.md) remain available. Their legacy architecture and inference commands are unchanged:
 
 ```sh
@@ -137,7 +177,7 @@ The viewer's collapsed noise panel applies seeded Gaussian corruption (sigma 0.2
 EVALDELTA_SCRIPT=../evaldelta/evaldelta.py OPENBLAS_NUM_THREADS=1 python -m unittest -v
 ```
 
-There are **39 SelectiveML tests**, including finite-difference gradient checks, reproducible training, split independence, full prediction recomputation from exported models, exact pairing, real CLI enforcement, manifests, bounded worker behavior, failure states and local HTTP request validation.
+There are **63 SelectiveML tests**, including finite-difference gradient checks, reproducible training, split independence, full prediction recomputation from exported models, exact pairing, real CLI enforcement, manifests, bounded worker behavior, failure states and local HTTP request validation. New coverage checks confusion-matrix orientation, every threshold boundary against brute-force counts, confidence ties, empty acceptance, original-policy compatibility, CLI overwrite prevention and malformed evidence archives.
 
 The integration workflow also runs **34 tests from the pinned EvalDelta revision**, exercises its real CLI, trains all six models on Python 3.12 and 3.14, and retains fresh evidence artifacts. Gate intervals are approximate and unadjusted per slice; neither the tests nor the gate establish production safety.
 

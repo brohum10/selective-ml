@@ -18,6 +18,7 @@ import uuid
 import zipfile
 
 import release_lab
+import diagnostics
 
 ROOT = Path(__file__).resolve().parent
 MAX_BODY = 1024
@@ -30,7 +31,7 @@ class Lab:
         self.token = secrets.token_urlsafe(32)
         self.lock = threading.Lock()
         self.worker = None
-        self.state = {'status': 'idle', 'events': [], 'result': None, 'error': None}
+        self.state = {'status': 'idle', 'events': [], 'result': None, 'diagnostics': None, 'error': None}
         self.current_output = None
 
     def snapshot(self):
@@ -42,7 +43,7 @@ class Lab:
             if self.state['status'] == 'running':
                 return False
             folder = self.output_root/('run-'+uuid.uuid4().hex)
-            self.state = {'status': 'running', 'events': [], 'result': None, 'error': None}
+            self.state = {'status': 'running', 'events': [], 'result': None, 'diagnostics': None, 'error': None}
             self.current_output = folder
             self.worker = threading.Thread(target=self._run, args=(folder,), daemon=True)
             self.worker.start()
@@ -55,8 +56,9 @@ class Lab:
     def _run(self, folder):
         try:
             result = release_lab.run(folder, self.comparator, self._progress)
+            analysis = diagnostics.summarize(result)
             with self.lock:
-                self.state.update(status='complete', result=result)
+                self.state.update(status='complete', result=result, diagnostics=analysis)
         except Exception:
             with self.lock:
                 self.state.update(status='failed', error='Experiment failed. Inspect the local server log; partial output is not a completed evidence bundle.')
@@ -111,6 +113,11 @@ class Handler(BaseHTTPRequestHandler):
             if result['status'] != 'complete':
                 return self.send(409, {'error': 'no completed experiment'})
             return self.send(200, result['result'], download='release-lab-report.json')
+        if path == '/api/diagnostics':
+            state = lab.snapshot()
+            if state['status'] != 'complete' or state['diagnostics'] is None:
+                return self.send(409, {'error': 'no completed diagnostics'})
+            return self.send(200, state['diagnostics'], download='release-lab-diagnostics.json')
         if path == '/api/evidence.zip':
             content = lab.evidence_zip()
             return self.send(409, {'error': 'no completed experiment'}) if content is None else self.send(200, content, 'application/zip', 'release-lab-evidence.zip')

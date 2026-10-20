@@ -55,6 +55,7 @@ class LocalServerTests(unittest.TestCase):
         self.assertEqual(json.loads(content)['status'], 'idle')
         self.assertEqual(self.call('/api/report')[0], 409)
         self.assertEqual(self.call('/api/evidence.zip')[0], 409)
+        self.assertEqual(self.call('/api/diagnostics')[0], 409)
 
     def test_rejects_cross_origin_bad_host_and_missing_session(self):
         self.assertEqual(self.call('/api/run', 'POST', b'{}', {'Content-Type':'application/json'})[0], 403)
@@ -73,7 +74,7 @@ class LocalServerTests(unittest.TestCase):
             entered.set()
             release.wait(3)
             return {'version':2}
-        with patch.object(lab_server.release_lab, 'run', fake_run):
+        with patch.object(lab_server.release_lab, 'run', fake_run), patch.object(lab_server.diagnostics, 'summarize', return_value={'version':1}):
             try:
                 self.assertEqual(self.call('/api/run', 'POST', b'{}', self.post())[0], 202)
                 self.assertTrue(entered.wait(1))
@@ -82,6 +83,7 @@ class LocalServerTests(unittest.TestCase):
                 release.set()
                 self.server.lab.worker.join(3)
         self.assertEqual(self.server.lab.snapshot()['status'], 'complete')
+        self.assertEqual(json.loads(self.call('/api/diagnostics')[2]), {'version':1})
 
     def test_worker_failure_does_not_publish_partial_evidence(self):
         with patch.object(lab_server.release_lab, 'run', side_effect=ValueError('failure')):
@@ -90,6 +92,14 @@ class LocalServerTests(unittest.TestCase):
                 self.server.lab.worker.join(3)
         self.assertEqual(self.server.lab.snapshot()['status'], 'failed')
         self.assertIsNone(self.server.lab.evidence_zip())
+
+    def test_diagnostic_failure_does_not_publish_a_successful_run(self):
+        with patch.object(lab_server.release_lab, 'run', return_value={'version':2}), patch.object(lab_server.diagnostics, 'summarize', side_effect=ValueError('invalid predictions')), patch('traceback.print_exc'):
+            self.server.lab.start()
+            self.server.lab.worker.join(3)
+        self.assertEqual(self.server.lab.snapshot()['status'], 'failed')
+        self.assertEqual(self.call('/api/diagnostics')[0], 409)
+        self.assertEqual(self.call('/api/report')[0], 409)
 
     def test_completed_bundle_download_is_scoped_and_has_real_file_bytes(self):
         folder = Path(self.temp.name)/'done'
