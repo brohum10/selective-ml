@@ -1,0 +1,44 @@
+1
+00:00:00,000 --> 00:00:02,847
+97.45% accuracy.
+Still says BLOCK.
+
+2
+00:00:02,847 --> 00:00:06,544
+5 improved. 1 regressed.
+Inspect every prediction.
+
+3
+00:00:06,544 --> 00:00:10,401
+Which image changed?
+Linear 5 → neural 1.
+
+4
+00:00:10,401 --> 00:00:14,168
+Trace the mistakes.
+Across every digit.
+
+5
+00:00:14,168 --> 00:00:17,998
+The learned policy:
+1 error flagged. 6 accepted.
+
+6
+00:00:17,998 --> 00:00:24,271
+20 reviews.
+14 answers already correct.
+
+7
+00:00:24,271 --> 00:00:28,329
+Confidence ≠ certainty.
+Inspect the full picture.
+
+8
+00:00:28,329 --> 00:00:32,444
+Export. Re-run. Verify.
+32 file hashes checked.
+
+9
+00:00:32,444 --> 00:00:35,735
+Every planned seed.
+Every outcome visible.

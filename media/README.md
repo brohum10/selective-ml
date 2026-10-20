@@ -1,4 +1,49 @@
-# Model Release Lab: recorded application demo
+# Model Release Lab: recorded application demos
+
+## Latest: 36-second decision workbench
+
+[Watch the updated workbench recording](SelectiveML-Workbench-Demo.mp4)
+
+![Updated workbench cover](SelectiveML-Workbench-Cover.png)
+
+Actual local app recording of a completed, real model experiment: paired gate,
+error atlas, an individual newly wrong prediction, confusion matrix, learned
+review policy, exploratory threshold/workload curve, confidence bins, evidence
+exports and all three planned seeds. The video is intentionally silent and has
+on-screen explanations plus [optional SRT captions](SelectiveML-Workbench-Captions.srt).
+Title/footer bands and a camera close-up of the recorded row-1575 card are added
+outside/within the captured pixels. No digit image, pointer action, UI state or
+model prediction is fabricated. This video inspects completed results; it does
+not show training in real time.
+
+The selected seed is 43, the first blocked run in fixed seed order. The case
+filter is linear-correct/neural-wrong and true digit 5; row 1575 is its only case.
+It is an individual changed prediction, not proof of a class-level regression.
+The digit-5 gate remains inconclusive under the configured non-regression margin.
+
+At the independently learned policy threshold: 1 error deferred, 6 still accepted.
+At the explored 95% confidence threshold: 20 cases deferred, including 6 errors
+and 14 correct predictions; 1 error still accepted. The latter is a retrospective
+test-set what-if, not a validated policy, deployment improvement or fitted result.
+The frozen policy and gate are never modified by the sandbox.
+
+- [Exact demo facts and scope](workbench-demo-facts.json): all seed outcomes,
+  row selection, thresholds, counts, source fingerprints and video checksum.
+- [Exact recorded experiment ZIP](workbench-demo-evidence.zip): exported models,
+  input rows, predictions, paired JSONL, controls, reports and manifest.
+
+The existing verifier checked all **32 manifest-listed files** in that exact ZIP
+without extracting or executing bundle files. Hashes are unsigned: integrity
+relative to a manifest is not proof of authenticity or scientific validity.
+
+```sh
+python audit_evidence.py media/workbench-demo-evidence.zip
+```
+
+This is a retrospective learning project on a small public dataset. Seed test
+sets overlap and must not be pooled; approximate intervals are unadjusted per
+slice. The application is local, not a production deployment or blind benchmark.
+The project and presentation were developed with AI assistance.
 
 ## Decision workbench extension
 
@@ -13,9 +58,10 @@ and manifest have not been overwritten.
 The sandbox screenshot explores 95% confidence on seed 43: 20 cases deferred,
 6 errors flagged, 14 correct answers deferred, 1 error still accepted. This is a
 test-set what-if, not policy training or fresh validation. The frozen policy and
-BLOCK result do not change. The video below predates these extra panels.
+BLOCK result do not change. The earlier recording below predates these extra panels;
+the latest recording above includes them.
 
-## Original model-comparison recording
+## Earlier: 29-second model-comparison recording
 
 [Watch the 29-second screen recording](SelectiveML-Release-Lab-Demo.mp4)
 

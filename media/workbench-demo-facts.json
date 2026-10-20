@@ -1,0 +1,289 @@
+{
+  "scope": "Actual screen recording of a completed local experiment, with explanatory caption bands and a cropped close-up of its recorded case card. No generated UI or predictions.",
+  "source_revision": "3550d54d75d745fc119f3875610e11b02fbca3a3",
+  "recorded_run_created_utc": "2026-10-20T15:00:40.900778+00:00",
+  "recording_duration_seconds": 35.735,
+  "video_sha256": "ba9630b0bd5f11fa63778725c97d068564d4cb9c708954fb0b86f345896e83fd",
+  "protocol_sha256": "b794f3be92ad05299685c15fedfac2658519e7754342e4ad78b3f7cb87bfb3e7",
+  "source_sha256": {
+    "selective_ml.py": "4fd694b7664e72f74298ec67d1ba9ab004fd7fbeb29ff9d8e6261f45311b72e2",
+    "release_lab.py": "3313397a8e59fa0fba4d124b0a353e9e5b77f94f0087ce9b62ffbfbe7a5364bb",
+    "walkthrough.py": "018ea988722fb89c0af40dabb2aa08d752f2f2c1d0de2ad3883e78c892752ac1",
+    "lab_protocol.json": "dc89fc42f3385f73c65622eaaf5adc2465544e0c1c29b4591f3ed42f33497734"
+  },
+  "diagnostics_source_sha256": "0ca2bab8766c2039f47d9ff21850b66a61513b0cb78795fa997ef5ace6a582eb",
+  "featured_seed": 43,
+  "case_count": 275,
+  "baseline_correct": 264,
+  "candidate_correct": 268,
+  "changes": {
+    "both_correct": 263,
+    "improved": 5,
+    "regressed": 1,
+    "both_wrong": 6
+  },
+  "frozen_policy": {
+    "threshold": 0.5492933736263179,
+    "total": 275,
+    "accepted": 274,
+    "deferred": 1,
+    "accepted_errors": 6,
+    "deferred_errors": 1,
+    "deferred_correct": 0,
+    "coverage": 0.9963636363636363,
+    "accepted_accuracy": 0.9781021897810219
+  },
+  "exploratory_threshold_95": {
+    "threshold": 0.95,
+    "total": 275,
+    "accepted": 255,
+    "deferred": 20,
+    "accepted_errors": 1,
+    "deferred_errors": 6,
+    "deferred_correct": 14,
+    "coverage": 0.9272727272727272,
+    "accepted_accuracy": 0.996078431372549
+  },
+  "exploration_scope": "Test-set what-if only; frozen policy and gate unchanged. Not new validation.",
+  "individual_case": {
+    "row": 1575,
+    "label": 5,
+    "baseline_prediction": 5,
+    "candidate_prediction": 1,
+    "candidate_confidence": 0.608540878927856,
+    "selection": "Only linear-correct/neural-wrong true-digit-5 case in seed 43, via explicit UI filters."
+  },
+  "all_seeds": [
+    {
+      "seed": 42,
+      "n": 275,
+      "baseline_accuracy": 0.9636363636363636,
+      "candidate_accuracy": 0.9745454545454545,
+      "gate": "pass"
+    },
+    {
+      "seed": 43,
+      "n": 275,
+      "baseline_accuracy": 0.96,
+      "candidate_accuracy": 0.9745454545454545,
+      "gate": "block"
+    },
+    {
+      "seed": 44,
+      "n": 275,
+      "baseline_accuracy": 0.9563636363636364,
+      "candidate_accuracy": 0.9781818181818182,
+      "gate": "pass"
+    }
+  ],
+  "featured_gate": {
+    "version": 1,
+    "decision": "block",
+    "baseline_run": "linear-v1",
+    "candidate_run": "neural-v2",
+    "suite": "digits-seed43-test-v2",
+    "scorer": "exact-match-v1",
+    "baseline_sha256": "5f19f5b222aa2bf5b9867615eae40954ad39372617e9cb34975030462a9f2bf1",
+    "candidate_sha256": "9d951f01d57d4c8ed59483d85e5c8c98dd116e54141c58db3d4d908cdce81980",
+    "config": {
+      "margin": 0.02,
+      "min_cases": 20,
+      "samples": 2000,
+      "seed": 42,
+      "max_p95_ms": 1000.0
+    },
+    "method": "paired percentile bootstrap; unadjusted per-slice 95% intervals",
+    "blockers": [
+      {
+        "slice": "tag:digit-5",
+        "quality": "inconclusive",
+        "latency": "pass"
+      }
+    ],
+    "slices": [
+      {
+        "slice": "overall",
+        "n": 275,
+        "mean_delta": 0.014545454545454545,
+        "baseline_mean": 0.96,
+        "candidate_mean": 0.9745454545454545,
+        "interval_95": [
+          0.0,
+          0.03272727272727273
+        ],
+        "quality_status": "pass",
+        "candidate_p95_ms": 0.06773750000000006,
+        "latency_status": "pass"
+      },
+      {
+        "slice": "tag:digit-0",
+        "n": 27,
+        "mean_delta": 0.0,
+        "baseline_mean": 1.0,
+        "candidate_mean": 1.0,
+        "interval_95": [
+          0.0,
+          0.0
+        ],
+        "quality_status": "pass",
+        "candidate_p95_ms": 0.13164559999999997,
+        "latency_status": "pass"
+      },
+      {
+        "slice": "tag:digit-1",
+        "n": 28,
+        "mean_delta": 0.03571428571428571,
+        "baseline_mean": 0.9642857142857143,
+        "candidate_mean": 1.0,
+        "interval_95": [
+          0.0,
+          0.10714285714285714
+        ],
+        "quality_status": "pass",
+        "candidate_p95_ms": 0.021939699999999996,
+        "latency_status": "pass"
+      },
+      {
+        "slice": "tag:digit-2",
+        "n": 27,
+        "mean_delta": 0.0,
+        "baseline_mean": 1.0,
+        "candidate_mean": 1.0,
+        "interval_95": [
+          0.0,
+          0.0
+        ],
+        "quality_status": "pass",
+        "candidate_p95_ms": 0.05706259999999998,
+        "latency_status": "pass"
+      },
+      {
+        "slice": "tag:digit-3",
+        "n": 28,
+        "mean_delta": 0.07142857142857142,
+        "baseline_mean": 0.9285714285714286,
+        "candidate_mean": 1.0,
+        "interval_95": [
+          0.0,
+          0.17857142857142858
+        ],
+        "quality_status": "pass",
+        "candidate_p95_ms": 0.03709374999999996,
+        "latency_status": "pass"
+      },
+      {
+        "slice": "tag:digit-4",
+        "n": 28,
+        "mean_delta": 0.03571428571428571,
+        "baseline_mean": 0.9285714285714286,
+        "candidate_mean": 0.9642857142857143,
+        "interval_95": [
+          0.0,
+          0.10714285714285714
+        ],
+        "quality_status": "pass",
+        "candidate_p95_ms": 0.07580789999999994,
+        "latency_status": "pass"
+      },
+      {
+        "slice": "tag:digit-5",
+        "n": 28,
+        "mean_delta": -0.03571428571428571,
+        "baseline_mean": 1.0,
+        "candidate_mean": 0.9642857142857143,
+        "interval_95": [
+          -0.10714285714285714,
+          0.0
+        ],
+        "quality_status": "inconclusive",
+        "candidate_p95_ms": 0.0331068,
+        "latency_status": "pass"
+      },
+      {
+        "slice": "tag:digit-6",
+        "n": 28,
+        "mean_delta": 0.0,
+        "baseline_mean": 0.9642857142857143,
+        "candidate_mean": 0.9642857142857143,
+        "interval_95": [
+          0.0,
+          0.0
+        ],
+        "quality_status": "pass",
+        "candidate_p95_ms": 0.03447269999999999,
+        "latency_status": "pass"
+      },
+      {
+        "slice": "tag:digit-7",
+        "n": 27,
+        "mean_delta": 0.0,
+        "baseline_mean": 1.0,
+        "candidate_mean": 1.0,
+        "interval_95": [
+          0.0,
+          0.0
+        ],
+        "quality_status": "pass",
+        "candidate_p95_ms": 0.052137499999999976,
+        "latency_status": "pass"
+      },
+      {
+        "slice": "tag:digit-8",
+        "n": 27,
+        "mean_delta": 0.0,
+        "baseline_mean": 0.8888888888888888,
+        "candidate_mean": 0.8888888888888888,
+        "interval_95": [
+          0.0,
+          0.0
+        ],
+        "quality_status": "pass",
+        "candidate_p95_ms": 0.13849109999999995,
+        "latency_status": "pass"
+      },
+      {
+        "slice": "tag:digit-9",
+        "n": 27,
+        "mean_delta": 0.037037037037037035,
+        "baseline_mean": 0.9259259259259259,
+        "candidate_mean": 0.9629629629629629,
+        "interval_95": [
+          0.0,
+          0.1111111111111111
+        ],
+        "quality_status": "pass",
+        "candidate_p95_ms": 0.026053799999999988,
+        "latency_status": "pass"
+      }
+    ],
+    "regressions": [
+      {
+        "id": "digits-row-1575",
+        "delta": -1,
+        "tags": [
+          "digit-5"
+        ]
+      }
+    ]
+  },
+  "evidence_verification": {
+    "status": "verified",
+    "files_checked": 32,
+    "expanded_bytes": 7691369,
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "protocol_sha256": "b794f3be92ad05299685c15fedfac2658519e7754342e4ad78b3f7cb87bfb3e7",
+    "scope": "Integrity relative to an unsigned manifest; not authenticity, statistical validity or production safety."
+  },
+  "limitations": [
+    "Retrospective educational dataset; not a blind holdout claim.",
+    "Test sets overlap across seeds; do not pool observations.",
+    "Random row splits do not establish unseen-writer generalization.",
+    "Gate intervals are approximate and unadjusted per slice.",
+    "BLOCK can mean insufficient evidence, not a statistically established regression.",
+    "Selective deferral is a signal, not an implemented human review service or correctness guarantee."
+  ]
+}
