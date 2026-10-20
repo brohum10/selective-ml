@@ -30,11 +30,11 @@ The second screenshot explores a 95% confidence threshold on seed 43: 20 cases a
 
 ## See the actual app
 
-https://github.com/user-attachments/assets/9b2a3de1-1f50-4d3d-b599-076d86cd2679
+https://github.com/user-attachments/assets/a36b0db0-fa92-4767-9e9f-92a07a4758b9
 
-[Watch the approximately 36-second workbench demo](media/SelectiveML-Workbench-Demo.mp4) · [Exact demo facts](media/workbench-demo-facts.json) · [Scope and reproduction](media/README.md)
+[Watch the final 30-second workbench demo](media/SelectiveML-Workbench-Demo.mp4) · [Exact demo facts](media/workbench-demo-facts.json) · [Scope and reproduction](media/README.md)
 
-The video records the working local interface inspecting a completed real experiment: the paired gate, error atlas, exact changed image, confusion matrix, learned policy, exploratory review threshold, confidence bins, evidence exports and all three seed outcomes. Caption bands and a camera close-up of the recorded case card are added in editing. It does not show training in real time. No UI or predictions are generated for the video; it is not a production deployment. [The exact recorded evidence ZIP](media/workbench-demo-evidence.zip) includes all original model outputs and an unsigned integrity manifest. Earlier recordings remain available in the [media history](media/README.md).
+The video records the working local interface inspecting a completed real experiment: the paired gate, error atlas, exact changed image, learned policy, exploratory review threshold, evidence exports and all three seed outcomes. Caption bands, normal-speed cuts, short reading holds and a camera close-up of the recorded case card are added in editing. The confusion/reliability tables remain in the app but are omitted from this shorter cut. It does not show training in real time. No UI or predictions are generated for the video; it is not a production deployment. Review flags are not human reviews performed. [The exact recorded evidence ZIP](media/workbench-demo-evidence.zip) includes all original model outputs and an unsigned integrity manifest. Earlier recordings remain available in the [media history](media/README.md).
 
 ## Run the local interface
 
