@@ -38,6 +38,10 @@ jobs:
         run: python verify_gate.py --evaldelta tools/evaldelta/evaldelta.py
       - name: Train both real candidates on every planned seed and retain the comparisons
         run: python release_lab.py --evaldelta tools/evaldelta/evaldelta.py --output results/release-lab/ci
+      - name: Verify recorded evidence integrity without extraction
+        run: python audit_evidence.py media/release-lab-evidence.zip
+      - name: Export descriptive diagnostics from fresh predictions
+        run: python diagnostics.py --report results/release-lab/ci/summary.json --output results/diagnostics.json
       - name: Retain reproducible prediction and gate evidence
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
@@ -45,5 +49,6 @@ jobs:
           path: |
             results/walkthrough/
             results/release-lab/ci/
+            results/diagnostics.json
           if-no-files-found: error
           retention-days: 14
